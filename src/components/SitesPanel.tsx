@@ -62,18 +62,18 @@ export function SitesPanel() {
   const down = sites.length - up;
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-3 py-5 sm:px-6 sm:py-8">
+    <div className="mx-auto w-full max-w-3xl px-4 py-5 sm:px-6 sm:py-8">
       <header className="mb-5 flex flex-col gap-3 sm:mb-7 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
           <p className="eyebrow">Felix Server</p>
-          <h1 className="mt-1 text-[1.45rem] font-semibold tracking-[-0.03em] sm:text-[1.75rem]">
+          <h1 className="mt-1 text-[1.35rem] font-semibold tracking-[-0.03em] sm:text-[1.75rem]">
             Monitored sites
           </h1>
           <p className="mt-1.5 text-sm text-[var(--muted)]">
             {sites.length} projects · {up} up · {down} down
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="desktop-nav-only flex flex-wrap gap-2">
           <Link
             href="/"
             className="toolbar-btn border border-[var(--line)] bg-white shadow-[var(--shadow)]"

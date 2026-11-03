@@ -125,16 +125,16 @@ export function ProjectDetail({ id }: { id: string }) {
   const isLive = ageMs != null && ageMs < LIVE_WINDOW_MS;
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-3 pb-12 pt-3 sm:px-6 sm:pt-6">
+    <div className="mx-auto w-full max-w-5xl px-4 pt-3 sm:px-6 sm:pt-6">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <Link href="/" className="btn-secondary">
-          ← Dashboard
+        <Link href="/sites" className="btn-secondary">
+          ← Sites
         </Link>
         <CountdownTimer
           seconds={nextInSec}
           checking={checking}
           label="Next check"
-          size="lg"
+          size="sm"
         />
       </div>
 

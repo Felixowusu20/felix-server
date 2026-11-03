@@ -74,7 +74,7 @@ export function AdminPanel() {
   const usedPct = Math.min(100, (sites.length / 20) * 100);
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-3 py-5 sm:px-6 sm:py-8">
+    <div className="mx-auto w-full max-w-6xl px-4 py-5 sm:px-6 sm:py-8">
       <header className="mb-5 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-3">
           <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[var(--line)] bg-white p-1.5 shadow-[var(--shadow)] sm:flex">
@@ -88,12 +88,12 @@ export function AdminPanel() {
           </div>
           <div className="min-w-0">
             <p className="eyebrow">Felix Server</p>
-            <h1 className="mt-1 text-[1.45rem] font-semibold tracking-[-0.03em] sm:text-[1.75rem]">
+            <h1 className="mt-1 text-[1.35rem] font-semibold tracking-[-0.03em] sm:text-[1.75rem]">
               Add sites to monitor
             </h1>
           </div>
         </div>
-        <div className="flex flex-wrap gap-2 self-start">
+        <div className="desktop-nav-only flex flex-wrap gap-2 self-start">
           <Link
             href="/sites"
             className="toolbar-btn border border-[var(--line)] bg-white shadow-[var(--shadow)] sm:min-h-[2.25rem] sm:px-4"

@@ -41,8 +41,13 @@ export function SettingsPanel() {
     }
   }
 
+  async function logout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    window.location.href = "/login";
+  }
+
   return (
-    <div className="mx-auto w-full max-w-2xl px-3 py-6 sm:px-6 sm:py-8">
+    <div className="mx-auto w-full max-w-2xl px-4 py-6 sm:px-6 sm:py-8">
       <header className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
         <div className="flex items-start gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--line)] bg-white p-1.5 shadow-[var(--shadow)]">
@@ -50,7 +55,7 @@ export function SettingsPanel() {
           </div>
           <div>
             <p className="eyebrow">Settings</p>
-            <h1 className="mt-1 text-[1.6rem] font-semibold tracking-[-0.03em]">
+            <h1 className="mt-1 text-[1.45rem] font-semibold tracking-[-0.03em] sm:text-[1.6rem]">
               Admin security
             </h1>
             <p className="mt-2 text-sm text-[var(--muted)]">
@@ -58,7 +63,7 @@ export function SettingsPanel() {
             </p>
           </div>
         </div>
-        <Link href="/" className="btn-secondary self-start">
+        <Link href="/" className="btn-secondary desktop-nav-only self-start">
           ← Dashboard
         </Link>
       </header>
@@ -99,10 +104,20 @@ export function SettingsPanel() {
           </div>
         ) : null}
 
-        <button type="submit" disabled={busy} className="btn-primary">
+        <button type="submit" disabled={busy} className="btn-primary w-full sm:w-auto">
           {busy ? "Saving…" : "Update password"}
         </button>
       </form>
+
+      <section className="panel mt-4 space-y-3 p-5 lg:hidden">
+        <p className="eyebrow">Session</p>
+        <p className="text-sm text-[var(--muted)]">
+          Sign out of Felix Server on this device.
+        </p>
+        <button type="button" onClick={logout} className="btn-secondary w-full">
+          Log out
+        </button>
+      </section>
     </div>
   );
 }

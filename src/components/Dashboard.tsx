@@ -171,34 +171,25 @@ export function Dashboard() {
   }, [sites, query, filter, isUp]);
 
   return (
-    <div className="dash mx-auto w-full max-w-7xl overflow-x-hidden px-4 pb-[max(3rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6 sm:pt-6">
+    <div className="dash mx-auto w-full max-w-7xl overflow-x-hidden px-4 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6 sm:pt-6">
       <header className="topbar sticky top-0 z-20 mb-4 border-b border-[var(--line)] py-3 sm:mb-6">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-start justify-between gap-3 sm:items-center">
-            <div className="min-w-0 flex-1">
-              <p className="eyebrow">Felix Server</p>
-              <h1 className="mt-0.5 text-[1.2rem] font-semibold tracking-[-0.03em] sm:text-[1.5rem]">
-                Operations
-              </h1>
-            </div>
-            <div className="sm:hidden">
-              <CountdownTimer
-                seconds={nextInSec}
-                checking={running}
-                variant="toolbar"
-              />
-            </div>
+        <div className="flex items-center justify-between gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="eyebrow">Felix Server</p>
+            <h1 className="mt-0.5 text-[1.2rem] font-semibold tracking-[-0.03em] sm:text-[1.5rem]">
+              Operations
+            </h1>
           </div>
-
-          <div className="flex w-full min-w-0 flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
-            <div className="hidden sm:block">
-              <CountdownTimer
-                seconds={nextInSec}
-                checking={running}
-                variant="toolbar"
-              />
-            </div>
-            <nav className="toolbar-actions" aria-label="Main actions">
+          <div className="flex shrink-0 items-center gap-2">
+            <CountdownTimer
+              seconds={nextInSec}
+              checking={running}
+              variant="toolbar"
+            />
+            <nav
+              className="toolbar-actions desktop-nav-only"
+              aria-label="Main actions"
+            >
               <Link href="/sites" className="toolbar-btn">
                 Sites
               </Link>
