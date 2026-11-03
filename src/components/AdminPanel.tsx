@@ -77,7 +77,7 @@ export function AdminPanel() {
     <div className="mx-auto w-full max-w-6xl px-4 py-5 sm:px-6 sm:py-8">
       <header className="mb-5 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-3">
-          <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[var(--line)] bg-white p-1.5 shadow-[var(--shadow)] sm:flex">
+          <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--panel)] p-1.5 shadow-[var(--shadow)] sm:flex">
             <Image
               src="/icon-192.png"
               alt=""
@@ -96,13 +96,13 @@ export function AdminPanel() {
         <div className="desktop-nav-only flex flex-wrap gap-2 self-start">
           <Link
             href="/sites"
-            className="toolbar-btn border border-[var(--line)] bg-white shadow-[var(--shadow)] sm:min-h-[2.25rem] sm:px-4"
+            className="toolbar-btn border border-[var(--line)] bg-[var(--panel)] shadow-[var(--shadow)] sm:min-h-[2.25rem] sm:px-4"
           >
             ← Sites
           </Link>
           <Link
             href="/"
-            className="toolbar-btn border border-[var(--line)] bg-white shadow-[var(--shadow)] sm:min-h-[2.25rem] sm:px-4"
+            className="toolbar-btn border border-[var(--line)] bg-[var(--panel)] shadow-[var(--shadow)] sm:min-h-[2.25rem] sm:px-4"
           >
             Dashboard
           </Link>
@@ -123,7 +123,7 @@ export function AdminPanel() {
                 Name + public URL
               </p>
             </div>
-            <span className="rounded-md bg-[#f3f4f6] px-2 py-1 font-mono text-[11px] text-[var(--muted)]">
+            <span className="rounded-md bg-[var(--soft)] px-2 py-1 font-mono text-[11px] text-[var(--muted)]">
               {sites.length}/20
             </span>
           </div>
@@ -157,7 +157,7 @@ export function AdminPanel() {
                 <span>Capacity</span>
                 <span className="font-mono">{sites.length} of 20 used</span>
               </div>
-              <div className="h-1.5 overflow-hidden rounded-full bg-[#eef0f3]">
+              <div className="h-1.5 overflow-hidden rounded-full bg-[var(--skeleton)]">
                 <div
                   className="h-full rounded-full bg-[var(--accent)] transition-all"
                   style={{ width: `${usedPct}%` }}
@@ -166,7 +166,7 @@ export function AdminPanel() {
             </div>
 
             {error ? (
-              <div className="rounded-lg border border-[#fecaca] bg-[var(--down-soft)] px-3 py-2 text-sm text-[var(--down)]">
+              <div className="rounded-lg border border-[var(--down-border)] bg-[var(--down-soft)] px-3 py-2 text-sm text-[var(--down)]">
                 {error}
               </div>
             ) : null}
@@ -209,14 +209,14 @@ export function AdminPanel() {
               <h2 className="text-[15px] font-semibold tracking-tight">
                 Monitored sites
               </h2>
-              <span className="rounded-md bg-[#f3f4f6] px-2 py-1 font-mono text-[11px] text-[var(--muted)]">
+              <span className="rounded-md bg-[var(--soft)] px-2 py-1 font-mono text-[11px] text-[var(--muted)]">
                 {sites.length}
               </span>
             </div>
 
             {sites.length === 0 ? (
               <div className="px-5 py-10 text-center">
-                <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-[#f3f4f6] text-[var(--muted)]">
+                <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-[var(--soft)] text-[var(--muted)]">
                   <GlobeIcon />
                 </div>
                 <p className="text-sm font-medium text-[var(--ink)]">
@@ -234,7 +234,7 @@ export function AdminPanel() {
                     className="flex items-center justify-between gap-3 px-4 py-3.5 sm:px-5"
                   >
                     <div className="flex min-w-0 items-center gap-3">
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#f3f4f6] text-[var(--muted)]">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--soft)] text-[var(--muted)]">
                         <GlobeIcon className="h-3.5 w-3.5" />
                       </span>
                       <div className="min-w-0">

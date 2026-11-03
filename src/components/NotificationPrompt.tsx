@@ -112,7 +112,7 @@ export function NotificationPrompt() {
   if (!supported) return null;
 
   return (
-    <section className="mb-5 overflow-hidden rounded-[14px] border border-[var(--line)] bg-white shadow-[var(--shadow)] sm:mb-6">
+    <section className="mb-5 overflow-hidden rounded-[14px] border border-[var(--line)] bg-[var(--panel)] shadow-[var(--shadow)] sm:mb-6">
       <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
         <div className="flex min-w-0 items-start gap-3.5">
           <div className="relative mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[var(--line)] bg-[#f8faf9] p-1.5">

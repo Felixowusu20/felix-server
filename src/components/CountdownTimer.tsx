@@ -47,7 +47,7 @@ export function CountdownTimer({
 
   return (
     <div
-      className={`countdown-shell relative overflow-hidden rounded-[12px] border border-[var(--line)] bg-white ${dim.wrap} px-3 py-2.5 text-center`}
+      className={`countdown-shell relative overflow-hidden rounded-[12px] border border-[var(--line)] bg-[var(--panel)] ${dim.wrap} px-3 py-2.5 text-center`}
     >
       <div
         className="countdown-bar absolute inset-x-0 bottom-0 h-1 origin-left bg-[var(--accent)] transition-transform duration-1000 ease-linear"

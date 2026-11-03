@@ -14,6 +14,7 @@ import {
 import { ProjectList } from "./ProjectList";
 import { CountdownTimer } from "./CountdownTimer";
 import { NotificationPrompt } from "./NotificationPrompt";
+import { ThemeToggle } from "./ThemeToggle";
 import { FleetLatencyChart, UptimeDonut } from "./charts";
 
 type Filter = "all" | "up" | "down";
@@ -181,6 +182,7 @@ export function Dashboard() {
             </h1>
           </div>
           <div className="flex shrink-0 items-center gap-2">
+            <ThemeToggle compact />
             <CountdownTimer
               seconds={nextInSec}
               checking={running}
@@ -214,8 +216,8 @@ export function Dashboard() {
       <div
         className={`mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-[12px] border px-3 py-2.5 text-sm sm:mb-6 sm:px-3.5 ${
           isLive || running
-            ? "border-[#a7f3d0] bg-[var(--up-soft)]"
-            : "border-[var(--line)] bg-white"
+            ? "border-[var(--up-border)] bg-[var(--up-soft)]"
+            : "border-[var(--line)] bg-[var(--panel)]"
         }`}
       >
         <span
@@ -236,7 +238,7 @@ export function Dashboard() {
       </div>
 
       {error ? (
-        <div className="mb-4 rounded-[12px] border border-[#fecaca] bg-[var(--down-soft)] px-4 py-3 text-sm text-[var(--down)]">
+        <div className="mb-4 rounded-[12px] border border-[var(--down-border)] bg-[var(--down-soft)] px-4 py-3 text-sm text-[var(--down)]">
           {error}
         </div>
       ) : null}

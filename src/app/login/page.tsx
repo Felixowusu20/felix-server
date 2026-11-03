@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Suspense, useState, type FormEvent } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { PasswordField } from "@/components/PasswordField";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 function LoginForm() {
   const router = useRouter();
@@ -63,7 +64,7 @@ function LoginForm() {
       <section className="relative flex min-h-screen items-center justify-center bg-[var(--bg)] px-4 py-12 sm:px-8">
         <div className="relative w-full max-w-[420px]">
           <div className="mb-8 flex justify-center lg:hidden">
-            <div className="flex h-20 w-20 items-center justify-center rounded-[22px] border border-[var(--line)] bg-white p-3 shadow-[var(--shadow)]">
+            <div className="flex h-20 w-20 items-center justify-center rounded-[22px] border border-[var(--line)] bg-[var(--panel)] p-3 shadow-[var(--shadow)]">
               <Image
                 src="/icon-192.png"
                 alt="Felix Server"
@@ -93,10 +94,14 @@ function LoginForm() {
             />
 
             {error ? (
-              <div className="rounded-lg border border-[#fecaca] bg-[var(--down-soft)] px-3 py-2 text-sm text-[var(--down)]">
+              <div className="rounded-lg border border-[var(--down-border)] bg-[var(--down-soft)] px-3 py-2 text-sm text-[var(--down)]">
                 {error}
               </div>
             ) : null}
+
+            <div className="flex justify-end">
+              <ThemeToggle compact />
+            </div>
 
             <button type="submit" disabled={busy} className="btn-primary w-full py-2.5">
               {busy ? "Signing in…" : "Enter dashboard"}

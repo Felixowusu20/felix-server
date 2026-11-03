@@ -87,7 +87,7 @@ export function InstallPrompt() {
   return (
     <div className="install-banner">
       <div className="flex min-w-0 items-start gap-3">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] border border-[var(--line)] bg-white p-1 shadow-[var(--shadow)]">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] border border-[var(--line)] bg-[var(--panel)] p-1 shadow-[var(--shadow)]">
           <Image
             src="/icon-192.png"
             alt=""

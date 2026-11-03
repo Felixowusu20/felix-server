@@ -21,7 +21,7 @@ export function ProjectList({
         {[1, 2, 3].map((i) => (
           <div
             key={i}
-            className="h-14 animate-pulse rounded-[10px] bg-[#eef0f3]"
+            className="h-14 animate-pulse rounded-[10px] bg-[var(--skeleton)]"
           />
         ))}
       </div>
@@ -55,11 +55,11 @@ export function ProjectList({
           >
             <Link
               href={`/projects/${site.id}`}
-              className={`group flex items-center justify-between gap-3 rounded-[10px] border bg-white px-3.5 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm ${
+              className={`group flex items-center justify-between gap-3 rounded-[10px] border bg-[var(--panel)] px-3.5 py-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm ${
                 down
-                  ? "border-[#fecaca] hover:border-[var(--down)]"
+                  ? "border-[var(--down-border)] hover:border-[var(--down)]"
                   : up
-                    ? "border-[#a7f3d0] hover:border-[var(--up)]"
+                    ? "border-[var(--up-border)] hover:border-[var(--up)]"
                     : "border-[var(--line)] hover:border-[var(--line-strong)]"
               }`}
             >

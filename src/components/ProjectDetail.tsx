@@ -98,8 +98,8 @@ export function ProjectDetail({ id }: { id: string }) {
   if (loading && !site) {
     return (
       <div className="mx-auto max-w-5xl px-3 py-8 sm:px-6">
-        <div className="h-8 w-40 animate-pulse rounded bg-[#eef0f3]" />
-        <div className="mt-6 h-48 animate-pulse rounded-[12px] bg-[#eef0f3]" />
+        <div className="h-8 w-40 animate-pulse rounded bg-[var(--skeleton)]" />
+        <div className="mt-6 h-48 animate-pulse rounded-[12px] bg-[var(--skeleton)]" />
       </div>
     );
   }
@@ -141,10 +141,10 @@ export function ProjectDetail({ id }: { id: string }) {
       <header
         className={`fade-in mb-5 overflow-hidden rounded-[12px] border ${
           down
-            ? "site-card-down border-[#fecaca]"
+            ? "site-card-down border-[var(--down-border)]"
             : running
-              ? "site-card-up border-[#a7f3d0]"
-              : "border-[var(--line)] bg-white"
+              ? "site-card-up border-[var(--up-border)]"
+              : "border-[var(--line)] bg-[var(--panel)]"
         }`}
       >
         <div className="flex">
@@ -186,7 +186,7 @@ export function ProjectDetail({ id }: { id: string }) {
               <span
                 className={`rounded-md border px-2.5 py-1.5 font-mono text-[11px] ${
                   isLive || checking
-                    ? "border-[#a7f3d0] bg-[var(--up-soft)] text-[var(--up)]"
+                    ? "border-[var(--up-border)] bg-[var(--up-soft)] text-[var(--up)]"
                     : "border-[var(--line)] text-[var(--muted)]"
                 }`}
               >
@@ -198,7 +198,7 @@ export function ProjectDetail({ id }: { id: string }) {
       </header>
 
       {error ? (
-        <div className="mb-4 rounded-[12px] border border-[#fecaca] bg-[var(--down-soft)] px-4 py-3 text-sm text-[var(--down)]">
+        <div className="mb-4 rounded-[12px] border border-[var(--down-border)] bg-[var(--down-soft)] px-4 py-3 text-sm text-[var(--down)]">
           {error}
         </div>
       ) : null}
@@ -206,8 +206,8 @@ export function ProjectDetail({ id }: { id: string }) {
       <div
         className={`fade-in mb-5 rounded-[12px] border px-4 py-3 ${
           down
-            ? "border-[#fecaca] bg-[var(--down-soft)] text-[var(--down)]"
-            : "border-[#a7f3d0] bg-[var(--up-soft)] text-[var(--up)]"
+            ? "border-[var(--down-border)] bg-[var(--down-soft)] text-[var(--down)]"
+            : "border-[var(--up-border)] bg-[var(--up-soft)] text-[var(--up)]"
         }`}
         style={{ animationDelay: "40ms" }}
       >

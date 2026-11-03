@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Manrope } from "next/font/google";
 import { AppChrome } from "@/components/AppChrome";
+import { ThemeProvider } from "@/lib/theme";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -15,6 +16,20 @@ const jetbrains = JetBrains_Mono({
   weight: ["400", "500", "600"],
 });
 
+const themeBootScript = `
+(function () {
+  try {
+    var saved = localStorage.getItem("felix-theme");
+    var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var dark =
+      saved === "dark" || ((saved === "system" || !saved) && prefersDark);
+    if (saved === "light") dark = false;
+    if (dark) document.documentElement.classList.add("dark");
+    document.documentElement.style.colorScheme = dark ? "dark" : "light";
+  } catch (e) {}
+})();
+`;
+
 export const metadata: Metadata = {
   title: "Felix Server",
   description: "Felix Server — uptime and latency monitoring for your projects",
@@ -23,7 +38,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     title: "Felix Server",
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
   },
   icons: {
     icon: [
@@ -44,7 +59,7 @@ export const viewport: Viewport = {
   viewportFit: "cover",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f4f5f7" },
-    { media: "(prefers-color-scheme: dark)", color: "#111827" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b1220" },
   ],
 };
 
@@ -52,10 +67,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${manrope.variable} ${jetbrains.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
-        <AppChrome>{children}</AppChrome>
+        <ThemeProvider>
+          <AppChrome>{children}</AppChrome>
+        </ThemeProvider>
       </body>
     </html>
   );

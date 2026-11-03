@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { PasswordField } from "./PasswordField";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function SettingsPanel() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -50,16 +51,16 @@ export function SettingsPanel() {
     <div className="mx-auto w-full max-w-2xl px-4 py-6 sm:px-6 sm:py-8">
       <header className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
         <div className="flex items-start gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--line)] bg-white p-1.5 shadow-[var(--shadow)]">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--line)] bg-[var(--panel)] p-1.5 shadow-[var(--shadow)]">
             <Image src="/icon-192.png" alt="" width={40} height={40} className="rounded-xl" />
           </div>
           <div>
             <p className="eyebrow">Settings</p>
             <h1 className="mt-1 text-[1.45rem] font-semibold tracking-[-0.03em] sm:text-[1.6rem]">
-              Admin security
+              Preferences
             </h1>
             <p className="mt-2 text-sm text-[var(--muted)]">
-              Change your dashboard password. Forgot password emails go to your alert inbox.
+              Theme, security, and session controls for Felix Server.
             </p>
           </div>
         </div>
@@ -68,7 +69,26 @@ export function SettingsPanel() {
         </Link>
       </header>
 
+      <section className="panel mb-4 space-y-3 p-5 sm:p-6">
+        <div>
+          <p className="eyebrow">Appearance</p>
+          <h2 className="mt-1 text-[15px] font-semibold tracking-tight">
+            Color theme
+          </h2>
+          <p className="mt-1 text-sm text-[var(--muted)]">
+            Switch between light, dark, or match your device.
+          </p>
+        </div>
+        <ThemeToggle />
+      </section>
+
       <form onSubmit={onSubmit} className="panel space-y-4 p-5 sm:p-6">
+        <div>
+          <p className="eyebrow">Security</p>
+          <h2 className="mt-1 text-[15px] font-semibold tracking-tight">
+            Change password
+          </h2>
+        </div>
         <PasswordField
           id="current-password"
           label="Current password"
@@ -94,12 +114,12 @@ export function SettingsPanel() {
         />
 
         {message ? (
-          <div className="rounded-lg border border-[#a7f3d0] bg-[var(--up-soft)] px-3 py-2 text-sm text-[var(--up)]">
+          <div className="rounded-lg border border-[var(--up-border)] bg-[var(--up-soft)] px-3 py-2 text-sm text-[var(--up)]">
             {message}
           </div>
         ) : null}
         {error ? (
-          <div className="rounded-lg border border-[#fecaca] bg-[var(--down-soft)] px-3 py-2 text-sm text-[var(--down)]">
+          <div className="rounded-lg border border-[var(--down-border)] bg-[var(--down-soft)] px-3 py-2 text-sm text-[var(--down)]">
             {error}
           </div>
         ) : null}

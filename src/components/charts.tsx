@@ -119,7 +119,7 @@ export function FleetLatencyChart({
                 {s.avgLatencyMs} ms
               </span>
             </div>
-            <div className="h-2 overflow-hidden rounded-full bg-[#eef0f3]">
+            <div className="h-2 overflow-hidden rounded-full bg-[var(--soft-strong)]">
               <div
                 className="h-full rounded-full transition-all duration-500"
                 style={{
@@ -162,7 +162,7 @@ export function UptimeDonut({
           cy={size / 2}
           r={r}
           fill="none"
-          stroke="#eef0f3"
+          stroke="var(--soft-strong)"
           strokeWidth={stroke}
         />
         <circle

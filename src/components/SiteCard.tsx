@@ -159,7 +159,7 @@ export function SiteCard({
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-[var(--line)] bg-white px-2.5 py-2">
+    <div className="rounded-lg border border-[var(--line)] bg-[var(--panel)] px-2.5 py-2">
       <p className="text-[10px] uppercase tracking-[0.05em] text-[var(--muted)]">
         {label}
       </p>

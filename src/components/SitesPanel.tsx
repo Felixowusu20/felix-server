@@ -76,7 +76,7 @@ export function SitesPanel() {
         <div className="desktop-nav-only flex flex-wrap gap-2">
           <Link
             href="/"
-            className="toolbar-btn border border-[var(--line)] bg-white shadow-[var(--shadow)]"
+            className="toolbar-btn border border-[var(--line)] bg-[var(--panel)] shadow-[var(--shadow)]"
           >
             ← Dashboard
           </Link>
@@ -87,7 +87,7 @@ export function SitesPanel() {
       </header>
 
       {error ? (
-        <div className="mb-4 rounded-[12px] border border-[#fecaca] bg-[var(--down-soft)] px-4 py-3 text-sm text-[var(--down)]">
+        <div className="mb-4 rounded-[12px] border border-[var(--down-border)] bg-[var(--down-soft)] px-4 py-3 text-sm text-[var(--down)]">
           {error}
         </div>
       ) : null}
