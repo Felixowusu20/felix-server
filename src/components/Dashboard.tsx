@@ -171,22 +171,33 @@ export function Dashboard() {
   }, [sites, query, filter, isUp]);
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-3 pb-12 pt-3 sm:px-6 sm:pt-6">
-      <header className="topbar sticky top-0 z-20 -mx-3 mb-4 border-b border-[var(--line)] px-3 py-3 sm:-mx-6 sm:mb-6 sm:px-6">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-          <div className="min-w-0">
-            <p className="eyebrow">Felix Server</p>
-            <h1 className="mt-0.5 truncate text-[1.25rem] font-semibold tracking-[-0.03em] sm:text-[1.5rem]">
-              Operations
-            </h1>
+    <div className="dash mx-auto w-full max-w-7xl overflow-x-hidden px-4 pb-[max(3rem,env(safe-area-inset-bottom))] pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6 sm:pt-6">
+      <header className="topbar sticky top-0 z-20 mb-4 border-b border-[var(--line)] py-3 sm:mb-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-start justify-between gap-3 sm:items-center">
+            <div className="min-w-0 flex-1">
+              <p className="eyebrow">Felix Server</p>
+              <h1 className="mt-0.5 text-[1.2rem] font-semibold tracking-[-0.03em] sm:text-[1.5rem]">
+                Operations
+              </h1>
+            </div>
+            <div className="sm:hidden">
+              <CountdownTimer
+                seconds={nextInSec}
+                checking={running}
+                variant="toolbar"
+              />
+            </div>
           </div>
 
-          <div className="toolbar-cluster">
-            <CountdownTimer
-              seconds={nextInSec}
-              checking={running}
-              variant="toolbar"
-            />
+          <div className="flex w-full min-w-0 flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+            <div className="hidden sm:block">
+              <CountdownTimer
+                seconds={nextInSec}
+                checking={running}
+                variant="toolbar"
+              />
+            </div>
             <nav className="toolbar-actions" aria-label="Main actions">
               <Link href="/sites" className="toolbar-btn">
                 Sites
@@ -210,7 +221,7 @@ export function Dashboard() {
       </header>
 
       <div
-        className={`mb-4 flex items-center gap-2 rounded-[12px] border px-3 py-2.5 text-sm sm:mb-6 sm:px-3.5 ${
+        className={`mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 rounded-[12px] border px-3 py-2.5 text-sm sm:mb-6 sm:px-3.5 ${
           isLive || running
             ? "border-[#a7f3d0] bg-[var(--up-soft)]"
             : "border-[var(--line)] bg-white"
@@ -221,14 +232,14 @@ export function Dashboard() {
             isLive || running ? "live-pulse bg-[var(--up)]" : "bg-[var(--muted)]"
           }`}
         />
-        <p className="min-w-0 truncate font-medium">
+        <p className="min-w-0 flex-1 font-medium">
           {running
             ? "Checking projects…"
             : isLive
               ? "Monitoring live"
               : "Starting monitor…"}
         </p>
-        <p className="ml-auto shrink-0 font-mono text-[11px] text-[var(--muted)]">
+        <p className="font-mono text-[11px] text-[var(--muted)]">
           {up} up · {down} down
         </p>
       </div>
@@ -241,7 +252,7 @@ export function Dashboard() {
 
       <NotificationPrompt />
 
-      <section className="mb-4 grid grid-cols-2 gap-2 sm:mb-6 sm:grid-cols-4 sm:gap-2.5">
+      <section className="mb-4 grid grid-cols-2 gap-2.5 sm:mb-6 sm:grid-cols-4">
         <Stat label="Projects" value={String(sites.length)} />
         <Stat label="Running" value={String(up)} tone="up" />
         <Stat label="Down" value={String(down)} tone="down" />
@@ -261,11 +272,11 @@ export function Dashboard() {
               <h2 className="mt-1 text-[15px] font-semibold tracking-tight">
                 Status list
               </h2>
-              <p className="mt-1 text-xs text-[var(--muted)]">
+              <p className="mt-1 text-xs leading-relaxed text-[var(--muted)]">
                 Tap a project for latency, history, and details
               </p>
             </div>
-            <div className="flex gap-1.5 overflow-x-auto pb-0.5">
+            <div className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {(
                 [
                   ["all", "All"],
@@ -289,8 +300,9 @@ export function Dashboard() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search projects…"
             className="field mb-3"
+            enterKeyHint="search"
           />
-          <div className="max-h-[22rem] overflow-y-auto pr-0.5 sm:max-h-[28rem]">
+          <div className="max-h-[min(22rem,55vh)] overflow-y-auto overscroll-contain pr-0.5 sm:max-h-[28rem]">
             <ProjectList sites={filtered} loading={loading} />
           </div>
         </div>
@@ -306,7 +318,7 @@ export function Dashboard() {
             <div className="flex justify-center">
               <UptimeDonut uptimePct={fleetUptime ?? 0} size={120} />
             </div>
-            <div className="min-w-0">
+            <div className="min-w-0 overflow-hidden">
               <p className="mb-3 text-xs font-medium text-[var(--muted)]">
                 Average latency by project
               </p>
@@ -343,12 +355,12 @@ function Stat({
         : "var(--ink)";
 
   return (
-    <div className="panel px-3.5 py-3">
-      <p className="text-[10px] font-medium uppercase tracking-[0.06em] text-[var(--muted)]">
+    <div className="panel min-w-0 px-3 py-3 sm:px-3.5">
+      <p className="truncate text-[10px] font-medium uppercase tracking-[0.06em] text-[var(--muted)]">
         {label}
       </p>
       <p
-        className="mt-1.5 truncate font-mono text-[1.15rem] font-semibold tracking-tight"
+        className="mt-1.5 truncate font-mono text-[1.1rem] font-semibold tracking-tight sm:text-[1.15rem]"
         style={{ color }}
       >
         {value}
