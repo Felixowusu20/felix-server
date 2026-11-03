@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Felix Server
 
-## Getting Started
+DIY uptime dashboard for your deployed sites. Add URLs, get live status + latency on a password-protected board, and email alerts when something goes down or recovers.
 
-First, run the development server:
+## Stack
+
+- Next.js on **Vercel Pro** (cron every minute)
+- **Neon** Postgres
+- **Gmail SMTP** via Nodemailer
+- Shared password auth
+
+## Setup
+
+### 1. Create a Neon database
+
+1. Create a free project at [neon.tech](https://neon.tech)
+2. Copy the connection string into `DATABASE_URL`
+3. Run the SQL in [`sql/schema.sql`](sql/schema.sql) in the Neon SQL Editor
+
+### 2. Gmail App Password
+
+1. Enable 2FA on your Google account
+2. Create an [App Password](https://myaccount.google.com/apppasswords)
+3. Set `SMTP_USER`, `SMTP_PASS`, and `ALERT_EMAIL`
+
+### 3. Local env
 
 ```bash
+cp .env.example .env.local
+# fill in all values
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000), sign in with `DASHBOARD_PASSWORD`, add sites under **Manage sites**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4. Deploy to Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Push this repo and import it in Vercel
+2. Add the same env vars in Project Settings → Environment Variables
+3. Deploy — `vercel.json` registers a cron job for `/api/cron/check` every minute
+4. Set `CRON_SECRET` — Vercel sends `Authorization: Bearer <CRON_SECRET>` on cron invocations
 
-## Learn More
+## How it works
 
-To learn more about Next.js, take a look at the following resources:
+| Piece | Behavior |
+|---|---|
+| Cron | Every minute, hits each site URL, stores status + latency |
+| Dashboard | Polls `/api/sites` every 15s |
+| Alerts | Email only when status **changes** (UP↔DOWN) |
+| Retries | 2 retries before marking DOWN (reduces cold-start false alarms) |
+| Manual | “Check now” on each card |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Treats HTTP &lt; 500 as UP (server responded); network errors / timeouts / 5xx as DOWN
+- Prefer a public `/health` URL when a site is behind auth
+- Gmail daily send limits are fine for transition-only alerts on ~10 sites
